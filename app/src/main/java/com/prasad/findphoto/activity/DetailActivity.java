@@ -1,12 +1,14 @@
 package com.prasad.findphoto.activity;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.prasad.findphoto.R;
@@ -24,14 +26,17 @@ import java.net.URL;
  */
 public class DetailActivity  extends BaseActivity{
 
-
+    ProgressDialog progress;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         String url = getIntent().getStringExtra("URL");
         String title = getIntent().getStringExtra("TITLE");
-        ((TextView)findViewById(R.id.text_detail)).setText(title);
+        progress = new ProgressDialog(this);
+        progress.setMessage("Loading...");
+        progress.show();
+                ((TextView) findViewById(R.id.text_detail)).setText(title);
         new ImageDownloader().execute(url);
 
 
@@ -72,6 +77,7 @@ public class DetailActivity  extends BaseActivity{
             if (bitmap != null) {
                 ((ImageView) findViewById(R.id.image_detail)).setImageBitmap(bitmap);
             }
+            progress.hide();
         }
     }
 }

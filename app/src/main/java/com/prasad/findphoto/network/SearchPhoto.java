@@ -35,7 +35,7 @@ public class SearchPhoto extends AsyncTask<String, Integer, String> {
         HttpURLConnection urlConnection = null;
         String response = null;
         try {
-            URL url = new URL(String.format("https://api.flickr.com/services/rest/?&method=flickr.photos.search&format=json&api_key=74133bbd7fbc945b9cf5da5ad64e719e&tags=%s&per_page=10",search[0]));
+            URL url = new URL(String.format("https://api.flickr.com/services/rest/?&method=flickr.photos.search&format=json&api_key=74133bbd7fbc945b9cf5da5ad64e719e&tags=%s",search[0]));
 
             Log.v("URL>>",url.toString());
             urlConnection = (HttpURLConnection) url.openConnection();

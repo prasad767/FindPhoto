@@ -9,6 +9,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:ems="13"
+            android:hint="Search something here..."
             android:singleLine="true"
             android:id="@+id/search_txt" />
 
