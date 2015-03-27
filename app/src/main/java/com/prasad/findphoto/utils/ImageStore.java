@@ -29,4 +29,8 @@ public class ImageStore {
         return null;
     }
 
+    public void clean(){
+        imgCache.clear();
+    }
+
 }

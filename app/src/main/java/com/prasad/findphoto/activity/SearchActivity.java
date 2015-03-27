@@ -26,6 +26,7 @@ import com.prasad.findphoto.callback.ResponseCallback;
 import com.prasad.findphoto.dao.Photo;
 import com.prasad.findphoto.dao.PublicPhoto;
 import com.prasad.findphoto.network.SearchPhoto;
+import com.prasad.findphoto.utils.ImageStore;
 
 import java.util.ArrayList;
 
@@ -69,6 +70,10 @@ public class SearchActivity extends BaseActivity implements ResponseCallback, Im
     public void searchAction(View v){
 
         if(searchTxt.getText().toString().length() >0) {
+            if(photos != null)
+            photos.clear();
+
+            ImageStore.getInstance().clean();
             searchBtn.setEnabled(false);
 
             InputMethodManager imm = (InputMethodManager) getSystemService(
@@ -107,6 +112,7 @@ public class SearchActivity extends BaseActivity implements ResponseCallback, Im
     @Override
     public void onFailure(String json) {
         searchBtn.setEnabled(true);
+        Toast.makeText(this,"Error in search image", Toast.LENGTH_SHORT).show();
     }
 
     @Override

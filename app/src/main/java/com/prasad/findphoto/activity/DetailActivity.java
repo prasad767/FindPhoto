@@ -42,6 +42,13 @@ public class DetailActivity  extends BaseActivity{
 
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(progress != null)
+        progress.dismiss();
+    }
+
     public class ImageDownloader extends AsyncTask<String, Void, Bitmap> {
 
         ImageView imgView;
@@ -77,7 +84,13 @@ public class DetailActivity  extends BaseActivity{
             if (bitmap != null) {
                 ((ImageView) findViewById(R.id.image_detail)).setImageBitmap(bitmap);
             }
-            progress.hide();
+            progress.dismiss();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }

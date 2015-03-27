@@ -3,15 +3,7 @@ package com.prasad.findphoto.network;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.google.gson.Gson;
 import com.prasad.findphoto.callback.ResponseCallback;
-import com.prasad.findphoto.dao.Photos;
-import com.prasad.findphoto.dao.PublicPhoto;
-import com.prasad.findphoto.utils.Constans;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -46,12 +38,10 @@ public class SearchPhoto extends AsyncTask<String, Integer, String> {
             Log.v("Response>>",response);
 
         }
-        catch(IOException e){
-            e.printStackTrace();
-
-        }catch (Exception e){
+        catch (Exception e){
             e.printStackTrace();
         } finally {
+            if(urlConnection != null)
             urlConnection.disconnect();
             Log.v("Network","finally");
         }
@@ -64,8 +54,9 @@ public class SearchPhoto extends AsyncTask<String, Integer, String> {
 
     protected void onPostExecute(String result) {
 
-        if(callback != null && result != null){
-            callback.onSuccess(result);
+        if (callback != null){
+            if (result != null) callback.onSuccess(result);
+            else callback.onFailure(null);
         }
     }
 

@@ -7,7 +7,7 @@ import android.os.Handler;
 
 
 import com.prasad.findphoto.R;
-import com.prasad.findphoto.utils.Constans;
+import com.prasad.findphoto.utils.Constants;
 
 public class SplashActivity extends Activity {
 
@@ -26,7 +26,7 @@ public class SplashActivity extends Activity {
                 startActivity(new Intent(SplashActivity.this, SearchActivity.class));
                 finish();
             }
-        }, Constans.SPLASH_SCREEN_TIME);
+        }, Constants.SPLASH_SCREEN_TIME);
 
 
     }
