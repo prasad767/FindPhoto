@@ -6,4 +6,5 @@ package com.prasad.findphoto.callback;
 public interface GalleryClickListener {
 
     public void photoSelected(String url, String title);
+    public void insert(String from, String to);
 }

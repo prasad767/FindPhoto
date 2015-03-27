@@ -10,7 +10,6 @@
             android:layout_marginTop="10dp"
             android:ems="13"
             android:singleLine="true"
-            android:hint="@string/serach_hint"
             android:id="@+id/search_txt" />
 
         <Button
@@ -22,30 +21,6 @@
             android:background="@color/blue"
             android:textColor="@color/white"
             android:id="@+id/search_button" />
-
-<!--
-    <GridView
-        android:id="@+id/gridView"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_margin="5dp"
-        android:columnWidth="100dp"
-        android:gravity="center"
-        android:numColumns="auto_fit"
-        android:verticalSpacing="5dp"
-        android:drawSelectorOnTop="true"
-        android:stretchMode="columnWidth"
-        android:layout_below="@id/search_button">
-    </GridView>
--->
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:ems="13"
-        android:singleLine="true"
-        android:id="@+id/search_txt" />
 
 
     <android.support.v7.widget.RecyclerView

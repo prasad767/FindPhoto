@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.prasad.findphoto.R;
@@ -43,7 +44,8 @@ public class SearchActivity extends BaseActivity implements ResponseCallback, Im
         setContentView(R.layout.activity_search);
 
         searchTxt = (EditText)findViewById(R.id.search_txt);
-        searchTxt.setText("king");
+       // searchTxt.setText("blue sea");
+        //searchTxt.setText("king");
         searchBtn = (Button)findViewById(R.id.search_button);
 
         recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
@@ -57,10 +59,6 @@ public class SearchActivity extends BaseActivity implements ResponseCallback, Im
         }else{
             findViewById(R.id.text_no_photo).setVisibility(View.INVISIBLE);
         }
-
-
-
-
     }
 
     @Override
@@ -69,13 +67,18 @@ public class SearchActivity extends BaseActivity implements ResponseCallback, Im
     }
 
     public void searchAction(View v){
-        searchBtn.setEnabled(false);
 
-        InputMethodManager imm = (InputMethodManager)getSystemService(
-                Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(searchTxt.getWindowToken(), 0);
-        SearchPhoto c = new SearchPhoto(this);
-        c.execute(searchTxt.getText().toString());
+        if(searchTxt.getText().toString().length() >0) {
+            searchBtn.setEnabled(false);
+
+            InputMethodManager imm = (InputMethodManager) getSystemService(
+                    Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(searchTxt.getWindowToken(), 0);
+            SearchPhoto c = new SearchPhoto(this);
+            c.execute(searchTxt.getText().toString());
+        }else{
+            Toast.makeText(this,"Enter something to search", Toast.LENGTH_SHORT).show();
+         }
     }
 
 
@@ -153,5 +156,29 @@ public class SearchActivity extends BaseActivity implements ResponseCallback, Im
         display.getSize(size);
         int width = size.x;
         return Math.round(width/px);
+    }
+
+    @Override
+    public void insert(String from, String to) {
+        int fromIndex =0;
+        int toIndex = 0;
+        if(from.equals(to)){
+            return;
+        }
+        for(int i=0;i<photos.size();i++){
+            if(photos.get(i).id.equals(from)){
+                fromIndex =i;
+            }else if(photos.get(i).id.equals(to)){
+                toIndex =i;
+            }
+        }
+
+        photos.add(toIndex, photos.get(fromIndex));
+        if(fromIndex < toIndex){
+            photos.remove(fromIndex);
+        }else{
+            photos.remove(fromIndex + 1);
+        }
+        adapter.update(photos);
     }
 }
